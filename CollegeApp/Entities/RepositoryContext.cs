@@ -7,9 +7,9 @@ namespace Entities
 {
     public class RepositoryContext : DbContext
     {
-        DbSet<Course> Course { get; set; }
-        DbSet<Student> Student { get; set; }
-        DbSet<Enrollment> Enrollment { get; set; }
+        public DbSet<Course> Course { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Enrollment> Enrollment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

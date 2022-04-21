@@ -19,5 +19,10 @@ namespace Entities.Models
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 
         public Course() { }
+        public Course(string Title, int Credits) 
+        {
+            this.Title = Title;
+            this.Credits = Credits;
+        }
     }
 }

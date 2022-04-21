@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace CollegeApp.Services.Interfaces
 {
     public interface ICourseRepository
     {
+        public void RegisterCourse(CourseRegisterDto courseDto);
     }
 }

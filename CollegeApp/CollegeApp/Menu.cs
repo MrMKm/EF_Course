@@ -1,4 +1,5 @@
 ﻿using CollegeApp.Services.Implementations;
+using CollegeApp.Services.Interfaces;
 using Shared;
 using Shared.Dto;
 using System;
@@ -12,22 +13,25 @@ namespace CollegeApp
     public class Menu
     {
         private readonly IStudentRepository _studentRepository;
+        private readonly ICourseRepository _courseRepository;
 
         public Menu()
         {
             _studentRepository = new StudentRepository();
+            _courseRepository = new CourseRepository();
         }
 
         public bool Show()
         {
             Console.Clear();
-            Console.WriteLine($"Choose an option \n" +
+            Console.WriteLine($"College App \n" +
                 $"1. Register student \n" +
                 $"2. Register course \n" +
                 $"3. Assign course \n" +
                 $"4. Evaluate student performance \n" +
                 $"5. Consult student performance \n" +
-                $"X. Any other key for exit \n\n");
+                $"X. Any other key for exit \n\n" +
+                $"Choose an option: ");
 
             switch(Console.ReadLine())
             {
@@ -82,7 +86,34 @@ namespace CollegeApp
 
         private void RegisterCourse()
         {
+            var CourseRegister = new CourseRegisterDto();
 
+            Console.WriteLine("Title: ");
+            CourseRegister.Title = Console.ReadLine();
+            Console.WriteLine("Credits: ");
+            if (!Int32.TryParse(Console.ReadLine(), out int credits))
+                throw new FormatException("Invalid credits format");
+
+            CourseRegister.Credits = credits;
+
+            try
+            {
+                Validation.ObjectValidator(CourseRegister);
+
+                _courseRepository.RegisterCourse(CourseRegister);
+
+                Console.WriteLine();
+                Console.WriteLine("Course registered successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadLine();
+            }
         }
     }
 }
