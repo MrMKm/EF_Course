@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollegeApp", "CollegeApp.csproj", "{141C3027-524A-44BC-BEF5-4A2C7284E0C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "..\Entities\Entities.csproj", "{C5CCF652-EEF8-4409-A9CF-C7E39C3ADC4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{B1AE0F67-A3BB-458C-9C52-151721977A75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{141C3027-524A-44BC-BEF5-4A2C7284E0C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141C3027-524A-44BC-BEF5-4A2C7284E0C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141C3027-524A-44BC-BEF5-4A2C7284E0C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141C3027-524A-44BC-BEF5-4A2C7284E0C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CCF652-EEF8-4409-A9CF-C7E39C3ADC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CCF652-EEF8-4409-A9CF-C7E39C3ADC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CCF652-EEF8-4409-A9CF-C7E39C3ADC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CCF652-EEF8-4409-A9CF-C7E39C3ADC4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AE0F67-A3BB-458C-9C52-151721977A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AE0F67-A3BB-458C-9C52-151721977A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AE0F67-A3BB-458C-9C52-151721977A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AE0F67-A3BB-458C-9C52-151721977A75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B78C043-CFDB-4956-9783-4C653AE313AD}
+	EndGlobalSection
+EndGlobal
