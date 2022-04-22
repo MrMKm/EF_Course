@@ -4,14 +4,16 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220422153143_addConfigs")]
+    partial class addConfigs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
@@ -105,7 +104,7 @@ namespace Entities.Migrations
                         .IsRequired();
 
                     b.HasOne("Entities.Models.Student", "student")
-                        .WithMany("Enrollments")
+                        .WithMany("Students")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -122,7 +121,7 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Student", b =>
                 {
-                    b.Navigation("Enrollments");
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

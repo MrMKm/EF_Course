@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Models
+namespace Shared.Dto
 {
-    public class Enrollment
+    public class EnrollmentDto
     {
+
         public int ID { get; set; }
 
         public int CourseID { get; set; }
@@ -17,18 +18,11 @@ namespace Entities.Models
 
         public Grade Grade { get; set; }
 
-        public virtual Course course { get; set; }
-
-        public virtual Student student { get; set; }
-
-
-        public Enrollment() { }
-
-        public Enrollment(int StudentID, int CourseID)
+        public EnrollmentDto(int StudentID, int CourseID, Grade grade)
         {
             this.StudentID = StudentID;
             this.CourseID = CourseID;
-            this.Grade = Grade.NA;
+            this.Grade = grade;
         }
     }
 }

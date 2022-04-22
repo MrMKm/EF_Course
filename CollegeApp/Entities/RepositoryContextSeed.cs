@@ -31,8 +31,8 @@ namespace Entities
             {
                 var seedCourses = new List<Course>
                 {
-                    new Course {Title = "Spanish", Credits = 4},
-                    new Course {Title = "English", Credits = 5}
+                    new Course {Title = "Spanish", Credits = 4, Capacity = 20},
+                    new Course {Title = "English", Credits = 5, Capacity = 20}
                 };
 
                 foreach (var course in seedCourses)

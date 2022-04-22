@@ -2,6 +2,7 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Reflection;
 
 namespace Entities
 {
@@ -13,7 +14,10 @@ namespace Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new StudentConfig());
+            //modelBuilder.ApplyConfiguration(new StudentConfig());
+            //modelBuilder.ApplyConfiguration(new CourseConfig());
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

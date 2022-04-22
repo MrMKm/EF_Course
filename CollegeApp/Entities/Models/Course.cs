@@ -16,13 +16,16 @@ namespace Entities.Models
 
         public int Credits { get; set; }
 
+        public int Capacity { get; set; }
+
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 
         public Course() { }
-        public Course(string Title, int Credits) 
+        public Course(string Title, int Credits, int Capacity) 
         {
             this.Title = Title;
             this.Credits = Credits;
+            this.Capacity = Capacity;
         }
     }
 }
