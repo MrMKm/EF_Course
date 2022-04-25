@@ -17,6 +17,8 @@ namespace Entities.Models
 
         public Grade Grade { get; set; }
 
+        public bool Active { get; set; }
+
         public virtual Course course { get; set; }
 
         public virtual Student student { get; set; }
@@ -29,6 +31,7 @@ namespace Entities.Models
             this.StudentID = StudentID;
             this.CourseID = CourseID;
             this.Grade = Grade.NA;
+            this.Active = true;
         }
     }
 }

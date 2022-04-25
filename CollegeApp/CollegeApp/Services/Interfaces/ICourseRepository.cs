@@ -14,5 +14,7 @@ namespace CollegeApp.Services.Interfaces
         public List<CourseDto> GetAvailableCourses(int StudentID);
         public List<CourseDto> GetCoursesByStudentID(int StudentID);
         public void UpdateCourse(CourseDto courseDto);
+        public CourseDto GetCourseByID(int CourseID);
+        public void DeleteCourse(int CourseID);
     }
 }

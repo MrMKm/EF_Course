@@ -63,12 +63,10 @@ namespace CollegeApp.Services.Implementations
                 throw new ArgumentNullException("Course with ID not found");
 
             if (course.Enrollments.Select(c => c.StudentID).Contains(student.ID))
-                throw new ArgumentNullException("Student already assigned to this course");
+                throw new ArgumentNullException("Student already assigned to this course, try to change inscription status");
 
             if(course.Capacity == 0)
                 throw new ApplicationException("Course it's full");
-
-            var enrollment = repositoryContext.Enrollment.Add(new Enrollment(student.ID, course.ID));
 
             if(course.Capacity == 1)
                 course.Capacity = 0;
@@ -76,8 +74,10 @@ namespace CollegeApp.Services.Implementations
             else
                 course.Capacity -= 1;
 
-            student.Enrollments.Add(enrollment.Entity);
-            course.Enrollments.Add(enrollment.Entity);
+            var newEnrollment = repositoryContext.Enrollment.Add(new Enrollment(student.ID, course.ID));
+
+            student.Enrollments.Add(newEnrollment.Entity);
+            course.Enrollments.Add(newEnrollment.Entity);
 
             repositoryContext.SaveChanges();
         }
@@ -99,10 +99,10 @@ namespace CollegeApp.Services.Implementations
         {
             var enrollment = repositoryContext.Enrollment
                 .FirstOrDefault(e => e.StudentID.Equals(enrollmentDto.StudentID) && 
-                                e.CourseID.Equals(enrollmentDto.CourseID));
+                                e.CourseID.Equals(enrollmentDto.CourseID) && e.Active.Equals(true));
 
             if (enrollment == null)
-                throw new ArgumentNullException("Enrollment with credentials not found");
+                throw new ArgumentNullException("Enrollment with credentials not found or inactive inscription");
 
             enrollment.Grade = enrollmentDto.Grade;
             repositoryContext.SaveChanges();
@@ -111,7 +111,7 @@ namespace CollegeApp.Services.Implementations
         public StudentEvaluationDto GetEvaluationByCode(string Code)
         {
             var enrollments = repositoryContext.Enrollment
-                .Where(e => e.student.Code.ToLower().Equals(Code.ToLower()))
+                .Where(e => e.student.Code.ToLower().Equals(Code.ToLower()) && e.Active.Equals(true))
                 .Select(e => new StudentEnrollmentDto
                 {
                     Title = e.course.Title,
@@ -139,6 +139,29 @@ namespace CollegeApp.Services.Implementations
                 throw new ArgumentNullException("Enrollments not assigned or all courses are already evaluated");
 
             return evaluation;
+        }
+
+        public void ChangeStudentStatusFromCourse(int StudentID, int CourseID)
+        {
+            var enrollment = repositoryContext.Enrollment
+                .Where(c => c.StudentID.Equals(StudentID) && c.CourseID.Equals(CourseID))
+                .FirstOrDefault();
+
+            if (enrollment == null)
+                throw new NullReferenceException("Enrollment with this credentials not found");
+
+            enrollment.Active = !enrollment.Active;
+
+            var course = repositoryContext.Course
+                .FirstOrDefault(c => c.ID.Equals(CourseID));
+
+            if (enrollment.Active)
+                course.Capacity -= 1;
+
+            else
+                course.Capacity += 1;
+
+            repositoryContext.SaveChanges();
         }
     }
 }

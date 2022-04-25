@@ -18,6 +18,8 @@ namespace Shared.Dto
 
         public Grade Grade { get; set; }
 
+        public bool Active { get; set; }
+
         public EnrollmentDto(int StudentID, int CourseID, Grade grade)
         {
             this.StudentID = StudentID;

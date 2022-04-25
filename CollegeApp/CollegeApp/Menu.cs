@@ -25,13 +25,15 @@ namespace CollegeApp
         public bool Show()
         {
             Console.Clear();
-            Console.WriteLine($"College App \n" +
+            Console.WriteLine($"College App \n\n" +
                 $"1. Register student \n" +
                 $"2. Register course \n" +
                 $"3. Assign course \n" +
                 $"4. Evaluate student performance \n" +
                 $"5. Consult student performance \n" +
-                $"6. Edit course \n\n" +
+                $"6. Edit course \n" +
+                $"7. Change student inscription status from course \n" +
+                $"8. Delete Course \n\n" +
                 $"X. Any other key for exit \n\n" +
                 $"Choose an option: ");
 
@@ -65,6 +67,16 @@ namespace CollegeApp
                 case "6":
                     Console.Clear();
                     UpdateCourse();
+                    break;
+
+                case "7":
+                    Console.Clear();
+                    ChangeStudentStatusFromCourse();
+                    break;
+
+                case "8":
+                    Console.Clear();
+                    DeleteCourse();
                     break;
 
                 default:
@@ -311,7 +323,8 @@ namespace CollegeApp
                     Console.WriteLine($"ID: {enrollment.CourseID} " +
                         $"\t Grade: {enrollment.Grade} " +
                         $"\t Credits: {enrollment.course.Credits} " +
-                        $"\t Title: {enrollment.course.Title}");
+                        $"\t Title: {enrollment.course.Title} " +
+                        $"\nInscription Status: {enrollment.Active} \n");
                 }
 
                 return student;
@@ -327,6 +340,68 @@ namespace CollegeApp
             }
 
             return null;
+        }
+
+        private void ChangeStudentStatusFromCourse()
+        {
+            try
+            {
+                Console.Clear();
+                var student = ConsultStudentPerformance();
+
+                Console.WriteLine("\nCourse ID:");
+                if (!Int32.TryParse(Console.ReadLine(), out int courseID))
+                    throw new FormatException("Invalid ID");
+
+                _studentRepository.ChangeStudentStatusFromCourse(student.ID, courseID);
+
+                Console.WriteLine("\nStudent status from course change successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("\n\nPress any key to continue...");
+                Console.ReadLine();
+            }
+        }
+
+        private void DeleteCourse()
+        {
+            try
+            {
+                var courses = _courseRepository.GetAllCourses();
+
+                Console.WriteLine("Courses information");
+                foreach (var course in courses)
+                {
+                    Console.WriteLine($"\nID: {course.ID} " +
+                        $"\t Capacity: {course.Capacity}  " +
+                        $"\t Credits: {course.Credits}  " +
+                        $"\t Title: {course.Title}");
+                }
+
+                Console.WriteLine("\nCourse ID:");
+                if (!Int32.TryParse(Console.ReadLine(), out int courseID))
+                    throw new FormatException("Invalid ID");
+
+                var dbCourse = _courseRepository.GetCourseByID(courseID);
+
+                _courseRepository.DeleteCourse(dbCourse.ID);
+
+                Console.WriteLine("\nCourse deleted succesfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadLine();
+            }
         }
 
         //private StudentEvaluationDto ConsultStudentPerformance2()
