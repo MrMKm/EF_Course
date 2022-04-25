@@ -1,5 +1,4 @@
-﻿using Business.Services.Implementations;
-using Entities.Models;
+﻿using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,23 +23,21 @@ namespace Repository
 
         public static List<Product> ProductsList = new List<Product>()
         {
-            new Product(1, "Orange juice", 10.99m, "1L", "LALA", "0000001", 100, 1, 1),
-            new Product(2, "Apple juice", 15.99m, "1L", "DelValle", "0000002", 100, 1, 1),
-            new Product(3, "Xbox Series X", 1000.99m, "Console", "Microsoft", "0000003", 100, 3, 7),
-            new Product(4, "Xbox Series S", 600.99m, "Console", "Microsoft", "0000004", 100, 3, 7),
-            new Product(5, "Samsung 70'' Crystal UHD", 1500.99m, "4K TV", "Samsung", "0000005", 100, 3, 5)
+            new Product(1, "Orange juice", 10.99m, "1L", "LALA", "0000001", 100, 1),
+            new Product(2, "Apple juice", 15.99m, "1L", "DelValle", "0000002", 100, 1),
+            new Product(3, "Xbox Series X", 1000.99m, "Console", "Microsoft", "0000003", 100, 7),
+            new Product(4, "Xbox Series S", 600.99m, "Console", "Microsoft", "0000004", 100, 7),
+            new Product(5, "Samsung 70'' Crystal UHD", 1500.99m, "4K TV", "Samsung", "0000005", 100, 5)
         };
 
         public static List<Department> DepartmentsList = new List<Department>()
         {
             new Department(1, "Alimentos", 
-                subDepartmentsList.Where(p => p.DepartmentID.Equals(1)).ToList(), 
-                ProductsList.Where(p => p.DepartmentID.Equals(1)).ToList()),
+                subDepartmentsList.Where(p => p.DepartmentID.Equals(1)).ToList()),
             new Department(2, "Muebles", 
-                subDepartmentsList.Where(p => p.DepartmentID.Equals(2)).ToList(), null),
+                subDepartmentsList.Where(p => p.DepartmentID.Equals(2)).ToList()),
             new Department(3, "Electrónica", 
-                subDepartmentsList.Where(p => p.DepartmentID.Equals(3)).ToList(), 
-                ProductsList.Where(p => p.DepartmentID.Equals(3)).ToList())
+                subDepartmentsList.Where(p => p.DepartmentID.Equals(3)).ToList())
         };
 
         public static List<Provider> ProvidersList = new List<Provider>()

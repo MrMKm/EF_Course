@@ -16,17 +16,15 @@ namespace Entities.Models
         [MinLength(1, ErrorMessage = "Name is required")]
         public string Name { get; private set; }
         public List<SubDepartment> subDepartments { get; set; }
-        public List<Product> Products { get; set; }
 
 
         public Department() { }
 
-        public Department(int ID, string Name, List<SubDepartment> subDepartments, List<Product> products)
+        public Department(int ID, string Name, List<SubDepartment> subDepartments)
         {
             this.ID = ID;
             this.Name = Name;
             this.subDepartments = subDepartments;
-            this.Products = products;
         }
         public override string ToString()
         {

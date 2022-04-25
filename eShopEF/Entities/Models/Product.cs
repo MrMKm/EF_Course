@@ -42,7 +42,7 @@ namespace Entities.Models
         public Product() { }
 
         public Product(int ID, string Name, decimal Price, string Description, 
-            string Brand, string SKU, int Stock, int DepartmentID, int subDepartmentID) 
+            string Brand, string SKU, int Stock, int subDepartmentID) 
         {
             if (Price < 0)
                 throw new InvalidOperationException("Price can't be lower than 0");

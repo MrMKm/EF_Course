@@ -1,10 +1,7 @@
-﻿using Business;
-using Business.Services.Implementations;
-using Data.Entities;
-using System;
+﻿using System;
 using System.Linq;
 
-namespace eShop
+namespace eShopEF
 {
     internal class Program
     {
