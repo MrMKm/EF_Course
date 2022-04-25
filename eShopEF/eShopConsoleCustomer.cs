@@ -51,7 +51,6 @@ namespace eShopEF
                         Price = dbProduct.Price,
                         Stock = dbProduct.Stock,
                         SKU = dbProduct.SKU,
-                        subDepartmentID = dbProduct.subDepartmentID
                     };
 
                     if (cart.Products.Contains(cart.GetProductByID(productDto.ID)))
@@ -143,7 +142,7 @@ namespace eShopEF
                     = _customerOrderRepository.GetCustomerOrders().Any() == true
                     ? (_customerOrderRepository.GetCustomerOrders().Last().ID + 1) : 1;
 
-                var purcharseOrder = new CustomerOrder(nextID, cart.Products);
+                var purcharseOrder = new CustomerOrder(cart.Products);
 
                 _customerOrderRepository.CreateCustomerOrder(purcharseOrder);
 

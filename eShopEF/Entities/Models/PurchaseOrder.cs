@@ -11,7 +11,6 @@ namespace Entities.Models
 {
     public class PurchaseOrder
     {
-        [Required]
         public int ID { get; private set; }
 
         public decimal Total { get; private set; }
@@ -20,11 +19,13 @@ namespace Entities.Models
         public DateTime Date { get; set; } = DateTime.Now;
 
         [Required]
-        public int ProviderID { get; private set; }
+        public int ProviderID { get; set; }
 
         public Provider Provider { get; set; }
 
-        public List<ProductDto> PurchasedProducts { get; private set; }
+        public int AdminOrderProductsID { get; set; }
+
+        public virtual ICollection<AdminOrderProducts> AdminOrderProducts { get; set; }
 
         public OrderStatus Status { get; set; }
 
@@ -33,12 +34,10 @@ namespace Entities.Models
 
         public PurchaseOrder() { }
 
-        public PurchaseOrder(int ID, int ProviderID, List<ProductDto> PurchasedProducts, DateTime Date)
+        public PurchaseOrder(int ProviderID, DateTime Date)
         {
-            this.ID = ID;
-            this.Total = PurchasedProducts.Sum(p => p.Price * p.Stock);
+            this.Total = AdminOrderProducts.Sum(p => p.product.Price * p.Quantity);
             this.ProviderID = ProviderID;
-            this.PurchasedProducts = PurchasedProducts;
             this.Date = Date;
 
             this.Status = OrderStatus.Pending;

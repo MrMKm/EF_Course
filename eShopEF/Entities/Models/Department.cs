@@ -15,12 +15,11 @@ namespace Entities.Models
         [Required(ErrorMessage = "Department name is required")]
         [MinLength(1, ErrorMessage = "Name is required")]
         public string Name { get; private set; }
-        public List<SubDepartment> subDepartments { get; set; }
-
+        public virtual ICollection<SubDepartment> subDepartments { get; set; } 
 
         public Department() { }
 
-        public Department(int ID, string Name, List<SubDepartment> subDepartments)
+        public Department(string Name, List<SubDepartment> subDepartments)
         {
             this.ID = ID;
             this.Name = Name;

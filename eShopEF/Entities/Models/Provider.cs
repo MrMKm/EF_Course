@@ -9,41 +9,36 @@ namespace Entities.Models
 {
     public class Provider
     {
-        [Required]
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "Name is required")]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "Address is required")]
-        public string Address { get; private set; }
+        public string Address { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "Phone is required")]
         [Phone]
-        public string Phone { get; private set; }
+        public string Phone { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "Email is required")]
         [EmailAddress]
-        public string Email { get; private set; }
+        public string Email { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "State is required")]
-        public string State { get; private set; }
+        public string State { get; set; }
 
 
 
         public Provider() { }
 
-        public Provider(int ID, string Name, string Address, string Phone, string Email, string State)
-        {
-            if (ID < 1)
-                throw new FormatException("Invalid ID");
-
-            this.ID = ID;
+        public Provider(string Name, string Address, string Phone, string Email, string State)
+        { 
             this.Name = Name;
             this.Address = Address;
             this.Phone = Phone;

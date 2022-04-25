@@ -9,19 +9,18 @@ namespace Entities.Models
 {
     public class CustomerOrder
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
-        public decimal Total { get; private set; }
+        public decimal Total { get; set; }
 
-        public DateTime Date { get; private set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
 
-        public List<ProductDto> PurchasedProducts { get; private set; }
+        public List<ProductDto> PurchasedProducts { get; set; }
 
         public CustomerOrder() { }
 
-        public CustomerOrder(int ID, List<ProductDto> PurchasedProducts)
+        public CustomerOrder(List<ProductDto> PurchasedProducts)
         {
-            this.ID = ID;
             this.Total = PurchasedProducts.Sum(p => p.Price * p.Stock);
             this.PurchasedProducts = PurchasedProducts;
         }

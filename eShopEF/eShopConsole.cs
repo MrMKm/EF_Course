@@ -70,7 +70,7 @@ namespace eShopEF
             try
             {
                 Product product = new 
-                    Product(id, name, price, description, brand, sku, stock, subDepartmentID);
+                    Product(name, price, description, brand, sku, stock, subDepartmentID);
 
                 Validation.ObjectValidator(product);
 

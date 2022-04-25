@@ -9,39 +9,37 @@ namespace Entities.Models
 {
     public class Product
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [MinLength(1, ErrorMessage = "Name is required")]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Stock is required")]
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "Price is required")]
-        public decimal Price { get; private set; }
+        public decimal Price { get; set; }
 
         [Required(ErrorMessage = "SKU is required")]
         [MinLength(1, ErrorMessage = "SKU is required")]
-        public string SKU { get; private set; }
+        public string SKU { get; set; }
 
         [Required(ErrorMessage = "Description is required")]
         [MinLength(1, ErrorMessage = "Description is required")]
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Brand is required")]
         [MinLength(1, ErrorMessage = "Brand is required")]
-        public string Brand { get; private set; }
+        public string Brand { get; set; }
 
-        public int subDepartmentID { get; private set; }
-
-        public Department Department { get; private set; }
-        public SubDepartment SubDepartment { get; private set; }
+        public int SubDepartmentID { get; set; }
+        public virtual SubDepartment subDepartment { get; set; }
 
 
         public Product() { }
 
-        public Product(int ID, string Name, decimal Price, string Description, 
+        public Product(string Name, decimal Price, string Description, 
             string Brand, string SKU, int Stock, int subDepartmentID) 
         {
             if (Price < 0)
@@ -50,14 +48,13 @@ namespace Entities.Models
             if (Stock <= 0)
                 throw new InvalidOperationException("Stock can't be lower than 1");
 
-            this.ID = ID;
             this.Name = Name;
             this.Price = Price;
             this.Description = Description;
             this.Brand = Brand;
             this.SKU = SKU;
             this.Stock = Stock;
-            this.subDepartmentID = subDepartmentID;
+            this.SubDepartmentID = subDepartmentID;
         }
 
         public void Update(string Name, decimal Price, string Description, string Brand, int Stock)
@@ -79,13 +76,13 @@ namespace Entities.Models
                 $"Brand: {this.Brand} \n" +
                 $"SKU: {this.SKU} \n" +
                 $"Stock: {this.Stock} \n" +
-                $"Sub department ID: {this.subDepartmentID} \n";
+                $"Sub department ID: {this.SubDepartmentID} \n";
         }
 
 
         public void SetSubDepartment(SubDepartment subDepartment)
         {
-            this.SubDepartment = subDepartment;
+            this.subDepartment = subDepartment;
         }
 
         public void AddStock(int Stock)

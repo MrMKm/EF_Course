@@ -9,26 +9,22 @@ namespace Entities.Models
 {
     public class SubDepartment
     {
-        [Required]
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Sub department name is required")]
         [MinLength(1, ErrorMessage = "Sub department name is required")]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Department ID is required")]
-        public int DepartmentID { get; private set; }
+        public int DepartmentID { get; set; }
 
-        public Department Department { get; private set; }
+        public Department department { get; set; }
 
 
         public SubDepartment() { }
 
-        public SubDepartment(int ID, string Name, int DepartmentID)
+        public SubDepartment(string Name, int DepartmentID)
         {
-            if (DepartmentID < 1)
-                throw new RankException("Invalid Department ID");
-
             this.ID = ID;
             this.Name = Name;
             this.DepartmentID = DepartmentID;
@@ -44,7 +40,7 @@ namespace Entities.Models
 
         public void SetDepartment(Department department)
         {
-            this.Department = department;
+            this.department = department;
         }
     }
 }

@@ -77,7 +77,7 @@ namespace eShopEF
         public static void DeparmentsAndSubDepartments()
         {
             var groups = _productRepository.GetProducts()
-                .GroupBy(p => p.subDepartmentID)
+                .GroupBy(p => p.SubDepartmentID)
                 .ToList();
 
 
@@ -125,7 +125,7 @@ namespace eShopEF
             foreach (var order in orders)
             {
                 Console.WriteLine(order.ToString());
-                foreach (var product in order.PurchasedProducts)
+                foreach (var product in order.AdminOrderProducts)
                     Console.WriteLine(product.ToString());
                 Console.WriteLine("**********************************");
             }
@@ -134,7 +134,7 @@ namespace eShopEF
         public static void XboxPurchases()
         {
             var groups = _productOrderRepository.GetPurchaseOrders()
-                .GroupBy(o => o.PurchasedProducts.FindAll(p => p.Name.Contains("Xbox")))
+                .GroupBy(o => o.AdminOrderProducts.ToList().FindAll(p => p.product.Name.Contains("Xbox")))
                 .ToList();
 
             foreach (var group in groups)
@@ -153,7 +153,7 @@ namespace eShopEF
             foreach (var order in orders)
             {
                 Console.WriteLine(order.ToString());
-                foreach (var product in order.PurchasedProducts)
+                foreach (var product in order.AdminOrderProducts)
                     Console.WriteLine(product.ToString());
                 Console.WriteLine("**********************************");
             }
@@ -162,18 +162,18 @@ namespace eShopEF
         public static void MostPurchasedProduct()
         {
             Nullable<int> productID = _productOrderRepository.GetPurchaseOrders()
-                .SelectMany(o => o.PurchasedProducts)
+                .SelectMany(o => o.AdminOrderProducts)
                 .GroupBy(p => p.ID)
                 .Select(g => new
                 {
                     ProductID = g.Key,
-                    Sum = g.Sum(p => p.Stock)
+                    Sum = g.Sum(p => p.Quantity)
                 })
                 .OrderByDescending(g => g.Sum)
                 .FirstOrDefault().ProductID;
 
             var product = _productOrderRepository.GetPurchaseOrders()
-                .GroupBy(o => o.PurchasedProducts.FirstOrDefault(p => p.ID.Equals((int)productID)))
+                .GroupBy(o => o.AdminOrderProducts.FirstOrDefault(p => p.ID.Equals((int)productID)))
                 .FirstOrDefault();
 
             if (product.Key == null)
