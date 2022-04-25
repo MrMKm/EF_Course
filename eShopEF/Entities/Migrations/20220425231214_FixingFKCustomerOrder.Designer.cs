@@ -4,14 +4,16 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220425231214_FixingFKCustomerOrder")]
+    partial class FixingFKCustomerOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +28,9 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CustomerOrderID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
@@ -36,6 +41,8 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CustomerOrderID");
 
                     b.HasIndex("ProductID");
 
@@ -81,8 +88,6 @@ namespace Entities.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CustomerOrderID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("CustomerOrderProduct");
                 });
@@ -181,6 +186,9 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AdminOrderProductsID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -223,6 +231,10 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.AdminOrderProducts", b =>
                 {
+                    b.HasOne("Entities.Models.CustomerOrder", null)
+                        .WithMany("PurchasedProducts")
+                        .HasForeignKey("CustomerOrderID");
+
                     b.HasOne("Entities.Models.Product", "product")
                         .WithMany()
                         .HasForeignKey("ProductID")
@@ -243,20 +255,12 @@ namespace Entities.Migrations
             modelBuilder.Entity("Entities.Models.CustomerOrderProduct", b =>
                 {
                     b.HasOne("Entities.Models.CustomerOrder", "customerOrder")
-                        .WithMany("PurchasedProducts")
+                        .WithMany()
                         .HasForeignKey("CustomerOrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("customerOrder");
-
-                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("Entities.Models.Product", b =>

@@ -1,4 +1,6 @@
-﻿using Entities.Models;
+﻿using Entities;
+using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Interfaces;
 using Shared;
@@ -13,7 +15,7 @@ namespace Repository.Implementations
 {
     public class CustomerOrderService : ICustomerOrderService
     {
-        private List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+        private readonly RepositoryContext repositoryContext = new RepositoryContext();
 
         public void CancelCustomerOrder(CustomerOrder customerOrder)
         {
@@ -22,25 +24,37 @@ namespace Repository.Implementations
             foreach (var product in customerOrder.PurchasedProducts)
             {
                 var dbProduct = _productServiceRepository.GetProductByID(product.ID);
-                dbProduct.AddStock(product.Stock);
+                dbProduct.AddStock(product.Quantity);
             }
 
-            customerOrders.Remove(customerOrder);
+            repositoryContext.CustomerOrder.Remove(customerOrder);
+            repositoryContext.SaveChanges();
         }
 
-        public void CreateCustomerOrder(CustomerOrder customerOrder)
+        public void CreateCustomerOrder(CustomerOrder customerOrder, Cart cart)
         {
-            customerOrders.Add(customerOrder);
+            repositoryContext.CustomerOrder.Add(customerOrder);
+            repositoryContext.SaveChanges();
+
+            foreach(var product in cart.Products)
+            {
+                repositoryContext.CustomerOrderProduct.Add(new CustomerOrderProduct(customerOrder.ID, product.ID, product.Stock));
+            }
+
+            repositoryContext.SaveChanges();
         }
 
         public List<CustomerOrder> GetCustomerOrders()
         {
-            return customerOrders;
+            return repositoryContext.CustomerOrder
+                .Include(c => c.PurchasedProducts).ThenInclude(p => p.product)
+                .ToList();
         }
 
         public CustomerOrder GetOrderByID(int OrderID)
         {
-            return customerOrders
+            return repositoryContext.CustomerOrder
+                .Include(c => c.PurchasedProducts).ThenInclude(p => p.product)
                 .FirstOrDefault(o => o.ID.Equals(OrderID));
         }
     }

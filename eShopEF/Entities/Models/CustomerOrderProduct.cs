@@ -18,6 +18,15 @@ namespace Entities.Models
 
         public virtual CustomerOrder customerOrder { get; set; }
 
+        public virtual Product product { get; set; }
+
         public CustomerOrderProduct() { }
+
+        public CustomerOrderProduct(int CustomerOrderID, int ProductID, int Quantity) 
+        {
+            this.CustomerOrderID = CustomerOrderID;
+            this.ProductID = ProductID;
+            this.Quantity = Quantity;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities;
+using Entities.Models;
 using Repository;
 using Repository.Interfaces;
 using Shared;
@@ -13,40 +14,44 @@ namespace Repository.Implementations
 {
     public class ProductService : IProductService
     {
-        private List<Product> ProductsList = TestData.ProductsList;
+        private readonly RepositoryContext repositoryContext = new RepositoryContext();
 
         public void CreateProduct(Product product)
         {
-            ProductsList.Add(product);
+            repositoryContext.Product.Add(product);
+            repositoryContext.SaveChanges();
         }
 
         public bool DeleteProduct(Product product)
         {
-            return ProductsList.Remove(product);
+            if(!repositoryContext.Product.ToList().Remove(product))
+                throw new ApplicationException("Product not found in database");
+
+            repositoryContext.SaveChanges();
+
+            return true;
         }
 
         public Product GetProductByID(int ProductID)
         {
-            return ProductsList
+            return repositoryContext.Product
                 .FirstOrDefault(p => p.ID.Equals(ProductID));
         }
 
         public List<Product> GetProducts()
         {
-            return ProductsList;
+            return repositoryContext.Product.ToList();
         }
 
         public void UpdateProduct(Product product)
         {
             Validation.ObjectValidator(product);
 
-            if (ProductsList.Remove(product))
+            if (repositoryContext.Product.ToList().Remove(product))
                 CreateProduct(product);
 
             else
                 throw new ApplicationException("Product not found");
-
-            ProductsList = ProductsList.OrderBy(p => p.ID).ToList();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Repository.Interfaces
         public Department GetDepartmentByID(int DepartmentID);
         public void CreateDepartment(Department department);
         public void UpdateDepartment(Department department);
-        public bool DeleteDepartment(Department department);
+        public void DeleteDepartment(Department department);
 
     }
 }

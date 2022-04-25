@@ -88,16 +88,16 @@ namespace eShopEF
                     = _productOrderRepository.GetPurchaseOrders().Any() == true
                     ? (_productOrderRepository.GetPurchaseOrders().Last().ID + 1) : 1;
 
-                var purcharseOrder = new PurchaseOrder(dbProvider.ID, DateTime.Now);
+                var purcharseOrder = new PurchaseOrder(dbProvider.ID, DateTime.Now, purchasedProducts);
                 purcharseOrder.SetProvider(dbProvider);
 
-                _productOrderRepository.CreatePurchaseOrder(purcharseOrder);
+                _productOrderRepository.CreatePurchaseOrder(purcharseOrder, purchasedProducts);
 
                 Console.Clear();
                 Console.WriteLine("\t\tOrder summary \n\n");
                 Console.WriteLine(dbProvider.ToString());
                 Console.WriteLine(purcharseOrder.ToString());
-                foreach (var product in purcharseOrder.AdminOrderProducts)
+                foreach (var product in purcharseOrder.AdminOrderProducts.ToList())
                 {
                     Console.WriteLine(product.ToString());
                     Console.WriteLine();
@@ -114,7 +114,7 @@ namespace eShopEF
             foreach(var order in _productOrderRepository.GetPurchaseOrders())
             {
                 Console.WriteLine(order.ToString());
-                foreach (var product in order.AdminOrderProducts)
+                foreach (var product in order.AdminOrderProducts.ToList())
                     Console.WriteLine(product.ToString());
                 Console.WriteLine("**********************************");
             }
@@ -132,7 +132,7 @@ namespace eShopEF
                 throw new ApplicationException("Purcharse order with ID not found");
 
             Console.WriteLine(order.ToString());
-            foreach (var product in order.AdminOrderProducts)
+            foreach (var product in order.AdminOrderProducts.ToList())
                 Console.WriteLine(product.ToString());
         }
 

@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities;
+using Entities.Models;
 using Repository;
 using Repository.Interfaces;
 using Shared;
@@ -13,7 +14,7 @@ namespace Repository.Implementations
 {
     public class SubDepartmentService : ISubDepartmentService
     {
-        private List<SubDepartment> subDepartmentsList = TestData.subDepartmentsList;
+        private readonly RepositoryContext repositoryContext = new RepositoryContext();
 
         public SubDepartmentService()
         {
@@ -21,28 +22,34 @@ namespace Repository.Implementations
 
         public void CreateSubDepartment(SubDepartment subDepartment)
         {
-            subDepartmentsList.Add(subDepartment);
+            repositoryContext.SubDepartment.Add(subDepartment);
+            repositoryContext.SaveChanges();
         }
 
         public bool DeleteSubDepartment(SubDepartment subDepartment)
         {
-            return subDepartmentsList.Remove(subDepartment);
+            if (!repositoryContext.SubDepartment.ToList().Remove(subDepartment))
+                throw new ApplicationException("SubDepartment not found in database");
+
+            repositoryContext.SaveChanges();
+
+            return true;
         }
 
         public SubDepartment GetSubDepartmentByID(int subID)
         {
-            return subDepartmentsList
+            return repositoryContext.SubDepartment
                 .FirstOrDefault(s => s.ID.Equals(subID));
         }
 
         public List<SubDepartment> GetSubDepartments()
         {
-            return subDepartmentsList;
+            return repositoryContext.SubDepartment.ToList();
         }
 
         public void UpdateSubDepartment(SubDepartment subDepartment)
         {
-            if (subDepartmentsList.Remove(subDepartment))
+            if (repositoryContext.SubDepartment.ToList().Remove(subDepartment))
                 CreateSubDepartment(subDepartment);
 
             else

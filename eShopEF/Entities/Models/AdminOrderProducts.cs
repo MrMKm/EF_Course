@@ -22,5 +22,12 @@ namespace Entities.Models
 
         
         public AdminOrderProducts() { }
+
+        public AdminOrderProducts(int PurchaseOrderID, int ProductID, int Quantity)
+        {
+            this.PurchaseOrderID = PurchaseOrderID;
+            this.ProductID = ProductID;
+            this.Quantity = Quantity;
+        }
     }
 }

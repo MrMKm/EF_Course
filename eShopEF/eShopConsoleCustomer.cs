@@ -144,14 +144,14 @@ namespace eShopEF
 
                 var purcharseOrder = new CustomerOrder(cart.Products);
 
-                _customerOrderRepository.CreateCustomerOrder(purcharseOrder);
+                _customerOrderRepository.CreateCustomerOrder(purcharseOrder, cart);
 
                 Console.Clear();
                 Console.WriteLine("\t\tOrder summary \n\n");
                 Console.WriteLine(purcharseOrder.ToString());
-                foreach (var product in purcharseOrder.PurchasedProducts)
+                foreach (var product in _customerOrderRepository.GetOrderByID(purcharseOrder.ID).PurchasedProducts.ToList())
                 {
-                    Console.WriteLine(product.ToString());
+                    Console.WriteLine(product.product.ToString());
                     Console.WriteLine();
                 }
             }
@@ -173,8 +173,8 @@ namespace eShopEF
                 throw new ApplicationException("Purcharse order with ID not found");
 
             Console.WriteLine(order.ToString());
-            foreach (var product in order.PurchasedProducts)
-                Console.WriteLine(product.ToString());
+            foreach (var product in order.PurchasedProducts.ToList())
+                Console.WriteLine(product.product.ToString());
         }
 
         public void ShowCustomerOrders()
@@ -186,8 +186,8 @@ namespace eShopEF
                 total += order.Total;
 
                 Console.WriteLine(order.ToString());
-                foreach (var product in order.PurchasedProducts)
-                    Console.WriteLine(product.ToString());
+                foreach (var product in order.PurchasedProducts.ToList())
+                    Console.WriteLine(product.product.ToString());
                 Console.WriteLine("**********************************");
             }
 

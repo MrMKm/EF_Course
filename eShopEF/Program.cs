@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Entities;
 
 namespace eShopEF
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            using (var Context = new RepositoryContext()) 
+            {
+                try
+                {
+                    await RepositoryContextSeed.SeedAsync(Context);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
             eShopConsole console = new eShopConsole();
 
             while (true)

@@ -15,14 +15,13 @@ namespace Entities.Models
 
         public DateTime Date { get; set; } = DateTime.Now;
 
-        public List<ProductDto> PurchasedProducts { get; set; }
+        public virtual ICollection<CustomerOrderProduct> PurchasedProducts { get; set; }
 
         public CustomerOrder() { }
 
         public CustomerOrder(List<ProductDto> PurchasedProducts)
         {
             this.Total = PurchasedProducts.Sum(p => p.Price * p.Stock);
-            this.PurchasedProducts = PurchasedProducts;
         }
 
         public override string ToString()

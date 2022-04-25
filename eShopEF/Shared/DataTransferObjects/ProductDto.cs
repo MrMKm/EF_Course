@@ -33,8 +33,6 @@ namespace Shared.DataTransferObjects
         [MinLength(1, ErrorMessage = "Brand is required")]
         public string Brand { get; set; }
 
-        public int subDepartmentID { get; set; }
-
         public override string ToString()
         {
             return $"Product Information; \n\n" +
@@ -44,8 +42,7 @@ namespace Shared.DataTransferObjects
                 $"Description: {this.Description} \n" +
                 $"Brand: {this.Brand} \n" +
                 $"SKU: {this.SKU} \n" +
-                $"Stock: {this.Stock} \n" +
-                $"Sub department ID: {this.subDepartmentID} \n";
+                $"Stock: {this.Stock} \n";
         }
     }
 }

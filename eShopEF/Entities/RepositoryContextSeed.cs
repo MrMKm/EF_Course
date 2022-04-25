@@ -11,7 +11,24 @@ namespace Entities
     {
         public static async Task SeedAsync(RepositoryContext repositoryContext)
         {
-            if(!repositoryContext.SubDepartment.Any())
+            if (!repositoryContext.Department.Any())
+            {
+                var seedDepartments = new List<Department>
+                {
+                    new Department("Alimentos"),
+                    new Department("Muebles"),
+                    new Department("Electrónica")
+                };
+
+                foreach (var department in seedDepartments)
+                {
+                    repositoryContext.Add(department);
+                }
+
+                repositoryContext.SaveChanges();
+            }
+
+            if (!repositoryContext.SubDepartment.Any())
             {
                 var seedSubDepartments = new List<SubDepartment>
                 {
@@ -46,46 +63,6 @@ namespace Entities
                 foreach (var product in seedProducts)
                 {
                     repositoryContext.Add(product);
-                }
-
-                repositoryContext.SaveChanges();
-            }
-
-            if (!repositoryContext.Department.Any())
-            {
-                var seedDepartments = new List<Department>
-                {
-                    new Department("Alimentos",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(1)).ToList()),
-                    new Department("Muebles",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(2)).ToList()),
-                    new Department("Electrónica",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(3)).ToList())
-                };
-
-                foreach (var department in seedDepartments)
-                {
-                    repositoryContext.Add(department);
-                }
-
-                repositoryContext.SaveChanges();
-            }
-
-            if (!repositoryContext.Department.Any())
-            {
-                var seedDepartments = new List<Department>
-                {
-                    new Department("Alimentos",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(1)).ToList()),
-                    new Department("Muebles",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(2)).ToList()),
-                    new Department("Electrónica",
-                        repositoryContext.SubDepartment.Where(p => p.DepartmentID.Equals(3)).ToList())
-                };
-
-                foreach (var department in seedDepartments)
-                {
-                    repositoryContext.Add(department);
                 }
 
                 repositoryContext.SaveChanges();

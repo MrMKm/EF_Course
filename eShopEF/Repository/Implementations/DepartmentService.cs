@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities;
+using Entities.Models;
 using Repository;
 using Repository.Interfaces;
 using Shared;
@@ -13,32 +14,34 @@ namespace Repository.Implementations
 {
     public class DepartmentService : IDepartmentService
     {
-        private List<Department> DepartmentsList = TestData.DepartmentsList;
+        private readonly RepositoryContext repositoryContext = new RepositoryContext();
 
         public void CreateDepartment(Department department)
         {
-            DepartmentsList.Add(department);
+            repositoryContext.Department.Add(department);
+            repositoryContext.SaveChanges();
         }
 
-        public bool DeleteDepartment(Department department)
+        public void DeleteDepartment(Department department)
         {
-            return DepartmentsList.Remove(department);
+            repositoryContext.Department.Remove(department);
+            repositoryContext.SaveChanges();
         }
 
         public Department GetDepartmentByID(int DepartmentID)
         {
-            return DepartmentsList
+            return repositoryContext.Department
                 .FirstOrDefault(d => d.ID.Equals(DepartmentID));
         }
 
         public List<Department> GetDepartments()
         {
-            return DepartmentsList;
+            return repositoryContext.Department.ToList();
         }
 
         public void UpdateDepartment(Department department)
         {
-            if (DepartmentsList.Remove(department))
+            if (repositoryContext.Department.ToList().Remove(department))
                 CreateDepartment(department);
 
             else

@@ -23,8 +23,6 @@ namespace Entities.Models
 
         public Provider Provider { get; set; }
 
-        public int AdminOrderProductsID { get; set; }
-
         public virtual ICollection<AdminOrderProducts> AdminOrderProducts { get; set; }
 
         public OrderStatus Status { get; set; }
@@ -34,9 +32,9 @@ namespace Entities.Models
 
         public PurchaseOrder() { }
 
-        public PurchaseOrder(int ProviderID, DateTime Date)
+        public PurchaseOrder(int ProviderID, DateTime Date, List<ProductDto> PurchasedProducts)
         {
-            this.Total = AdminOrderProducts.Sum(p => p.product.Price * p.Quantity);
+            this.Total = PurchasedProducts.Sum(p => p.Price * p.Stock);
             this.ProviderID = ProviderID;
             this.Date = Date;
 

@@ -11,7 +11,7 @@ namespace Repository.Interfaces
     {
         public List<CustomerOrder> GetCustomerOrders();
         public CustomerOrder GetOrderByID(int OrderID);
-        public void CreateCustomerOrder(CustomerOrder customerOrder);
+        public void CreateCustomerOrder(CustomerOrder customerOrder, Cart cart);
         public void CancelCustomerOrder(CustomerOrder customerOrder);
     }
 }

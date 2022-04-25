@@ -168,8 +168,7 @@ namespace eShopEF
 
             try
             {
-                if (!_productRepository.DeleteProduct(dbProduct))
-                    throw new ApplicationException("Product not found in database");
+                _productRepository.DeleteProduct(dbProduct);
 
                 Console.WriteLine("\n\n Product deleted successfully");
             }

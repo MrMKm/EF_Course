@@ -19,11 +19,9 @@ namespace Entities.Models
 
         public Department() { }
 
-        public Department(string Name, List<SubDepartment> subDepartments)
+        public Department(string Name)
         {
-            this.ID = ID;
             this.Name = Name;
-            this.subDepartments = subDepartments;
         }
         public override string ToString()
         {
