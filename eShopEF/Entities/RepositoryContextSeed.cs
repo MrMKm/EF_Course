@@ -109,5 +109,7 @@ namespace Entities
                 repositoryContext.SaveChanges();
             }
         }
+
+        public static string AdminPassword = "password";
     }
 }

@@ -1,5 +1,5 @@
-﻿using Entities.Models;
-using Repository;
+﻿using Entities;
+using Entities.Models;
 using Repository.Implementations;
 using Shared;
 using System;
@@ -342,7 +342,7 @@ namespace eShopEF
                     case "2":
                         Console.Clear();
                         Console.WriteLine("Password: ");
-                        if(Console.ReadLine() == TestData.AdminPassword)
+                        if(Console.ReadLine() == RepositoryContextSeed.AdminPassword)
                             AdminMenu();
 
                         else

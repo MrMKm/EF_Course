@@ -23,7 +23,7 @@ namespace Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eShop;Integrated Security=True";
+            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eShopV2;Integrated Security=True";
 
             options.UseSqlServer(connection);
         }
