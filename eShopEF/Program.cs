@@ -9,17 +9,19 @@ namespace eShopEF
     {
         static async Task Main(string[] args)
         {
-            using (var Context = new RepositoryContext()) 
-            {
-                try
-                {
-                    await RepositoryContextSeed.SeedAsync(Context);
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
+            // Pending seed fixing
+
+            //using (var Context = new RepositoryContext()) 
+            //{
+            //    try
+            //    {
+            //        await RepositoryContextSeed.SeedAsync(Context);
+            //    }
+            //    catch(Exception e)
+            //    {
+            //        Console.WriteLine(e.Message);
+            //    }
+            //}
 
             eShopConsole console = new eShopConsole();
 

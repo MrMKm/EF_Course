@@ -20,6 +20,8 @@ namespace eShopEF
         private static ProductOrderService _productOrderRepository;
         private static CustomerOrderService _customerOrderRepository;
 
+        private readonly RepositoryContext _repositoryContext;
+
         public void AddProduct()
         {
             Console.WriteLine("ID: ");
@@ -369,12 +371,12 @@ namespace eShopEF
 
         public eShopConsole()
         {
-            _productRepository = new ProductService();
-            _departmentRepository = new DepartmentService();
-            _subDepartmentRepository = new SubDepartmentService();
-            _providerRepository = new ProviderService();
-            _productOrderRepository = new ProductOrderService();
-            _customerOrderRepository = new CustomerOrderService();
+            _productRepository = new ProductService(_repositoryContext);
+            _departmentRepository = new DepartmentService(_repositoryContext);
+            _subDepartmentRepository = new SubDepartmentService(_repositoryContext);
+            _providerRepository = new ProviderService(_repositoryContext);
+            _productOrderRepository = new ProductOrderService(_repositoryContext);
+            _customerOrderRepository = new CustomerOrderService(_repositoryContext);
         }
     }
 }

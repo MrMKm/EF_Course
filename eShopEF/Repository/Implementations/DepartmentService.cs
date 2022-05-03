@@ -14,7 +14,12 @@ namespace Repository.Implementations
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
+
+        public DepartmentService(RepositoryContext _repositoryContext)
+        {
+            repositoryContext = _repositoryContext;
+        }
 
         public void CreateDepartment(Department department)
         {

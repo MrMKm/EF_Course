@@ -15,11 +15,16 @@ namespace Repository.Implementations
 {
     public class CustomerOrderService : ICustomerOrderService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
+
+        public CustomerOrderService(RepositoryContext _repositoryContext)
+        {
+            repositoryContext = _repositoryContext;
+        }
 
         public void CancelCustomerOrder(CustomerOrder customerOrder)
         {
-            var _productServiceRepository = new ProductService();
+            var _productServiceRepository = new ProductService(repositoryContext);
 
             foreach (var product in customerOrder.PurchasedProducts)
             {

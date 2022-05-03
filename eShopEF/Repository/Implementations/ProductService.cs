@@ -14,7 +14,12 @@ namespace Repository.Implementations
 {
     public class ProductService : IProductService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
+
+        public ProductService(RepositoryContext _repositoryContext)
+        {
+            repositoryContext = _repositoryContext;
+        }
 
         public void CreateProduct(Product product)
         {

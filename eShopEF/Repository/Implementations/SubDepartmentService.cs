@@ -14,10 +14,11 @@ namespace Repository.Implementations
 {
     public class SubDepartmentService : ISubDepartmentService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
 
-        public SubDepartmentService()
+        public SubDepartmentService(RepositoryContext _repositoryContext)
         {
+            repositoryContext = _repositoryContext;
         }
 
         public void CreateSubDepartment(SubDepartment subDepartment)

@@ -17,7 +17,12 @@ namespace Repository.Implementations
 {
     public class ProductOrderService : IProductOrderService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
+
+        public ProductOrderService(RepositoryContext _repositoryContext)
+        {
+            repositoryContext = _repositoryContext;
+        }
 
         public void ChangeStatus(int OrderID, OrderStatus status)
         {

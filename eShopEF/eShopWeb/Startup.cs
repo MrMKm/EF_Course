@@ -14,8 +14,9 @@ using Repository;
 using Repository.Interfaces;
 using Repository.Implementations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.OpenApi.Models;
 using eShopWeb.Models;
+using Entities.Models;
+using Microsoft.OpenApi.Models;
 
 namespace eShopWeb
 {

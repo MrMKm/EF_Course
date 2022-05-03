@@ -14,7 +14,12 @@ namespace Repository.Implementations
 {
     public class ProviderService : IProviderService
     {
-        private readonly RepositoryContext repositoryContext = new RepositoryContext();
+        private readonly RepositoryContext repositoryContext;
+
+        public ProviderService(RepositoryContext _repositoryContext)
+        {
+            repositoryContext = _repositoryContext;
+        }
 
         public void CreateProvider(Provider provider)
         {
