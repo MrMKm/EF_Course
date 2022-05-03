@@ -12,12 +12,15 @@
 
   <ItemGroup>
     <Compile Remove="Entities\**" />
+    <Compile Remove="eShopWeb\**" />
     <Compile Remove="Repository\**" />
     <Compile Remove="Shared\**" />
     <EmbeddedResource Remove="Entities\**" />
+    <EmbeddedResource Remove="eShopWeb\**" />
     <EmbeddedResource Remove="Repository\**" />
     <EmbeddedResource Remove="Shared\**" />
     <None Remove="Entities\**" />
+    <None Remove="eShopWeb\**" />
     <None Remove="Repository\**" />
     <None Remove="Shared\**" />
   </ItemGroup>
@@ -42,10 +45,6 @@
   <ItemGroup>
     <ProjectReference Include="Entities\Entities.csproj" />
     <ProjectReference Include="Repository\Repository.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="eShopWeb\bin\" />
   </ItemGroup>
 
 </Project>

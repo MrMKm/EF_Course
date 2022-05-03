@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Interfaces;
 using Shared;
@@ -21,10 +22,12 @@ namespace Repository.Implementations
             repositoryContext = _repositoryContext;
         }
 
-        public void CreateProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             repositoryContext.Product.Add(product);
             repositoryContext.SaveChanges();
+
+            return product;
         }
 
         public bool DeleteProduct(Product product)
@@ -48,12 +51,15 @@ namespace Repository.Implementations
             return repositoryContext.Product.ToList();
         }
 
-        public void UpdateProduct(Product product)
+        public Product UpdateProduct(Product product)
         {
             Validation.ObjectValidator(product);
 
             if (repositoryContext.Product.ToList().Remove(product))
+            {
                 CreateProduct(product);
+                return product;
+            }
 
             else
                 throw new ApplicationException("Product not found");

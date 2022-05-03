@@ -1,10 +1,10 @@
 ﻿using Entities;
 using Entities.Models;
+using Entities.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Interfaces;
 using Shared;
-using Shared.DataTransferObjects;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;

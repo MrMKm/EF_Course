@@ -36,28 +36,28 @@ namespace eShopWeb
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eShop-API", Version = "v1" });
 
-                //var securitySchema = new OpenApiSecurityScheme
-                //{
-                //    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                //    Name = "Authorization",
-                //    In = ParameterLocation.Header,
-                //    Type = SecuritySchemeType.Http,
-                //    Scheme = "bearer",
-                //    Reference = new OpenApiReference
-                //    {
-                //        Type = ReferenceType.SecurityScheme,
-                //        Id = "Bearer"
-                //    }
-                //};
+                var securitySchema = new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
 
-                //c.AddSecurityDefinition("Bearer", securitySchema);
+                c.AddSecurityDefinition("Bearer", securitySchema);
 
-                //var securityRequirement = new OpenApiSecurityRequirement
-                //{
-                //    { securitySchema, new[] { "Bearer" } }
-                //};
+                var securityRequirement = new OpenApiSecurityRequirement
+                {
+                    { securitySchema, new[] { "Bearer" } }
+                };
 
-                //c.AddSecurityRequirement(securityRequirement);
+                c.AddSecurityRequirement(securityRequirement);
             });
 
             services.AddControllersWithViews();
@@ -131,9 +131,11 @@ namespace eShopWeb
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllers();
             });
         }
     }

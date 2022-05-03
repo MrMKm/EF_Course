@@ -1,4 +1,5 @@
-﻿using Shared.DataTransferObjects;
+﻿
+using Entities.Models.DataTransferObjects;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;

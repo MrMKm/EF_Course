@@ -11,8 +11,8 @@ namespace Repository.Interfaces
     {
         public List<Product> GetProducts();
         public Product GetProductByID(int ProductID);
-        public void CreateProduct(Product product);
-        public void UpdateProduct(Product product);
+        public Product CreateProduct(Product product);
+        public Product UpdateProduct(Product product);
         public bool DeleteProduct(Product product);
     }
 }

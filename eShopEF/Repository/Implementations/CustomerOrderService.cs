@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Entities.Models;
+using Entities.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Interfaces;

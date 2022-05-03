@@ -19,10 +19,10 @@ namespace Entities
         public DbSet<PurchaseOrder> PurchaseOrder { get; set; }
         public DbSet<SubDepartment> SubDepartment { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        //}
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //{
