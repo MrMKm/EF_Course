@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopEF", "eShopEF.csproj", "{1DD8E476-64AD-4ED3-B94F-6604F3E09E44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopEF", "eShopEF.csproj", "{1DD8E476-64AD-4ED3-B94F-6604F3E09E44}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6223889B-12D4-46D0-8939-101C77E74B4A} = {6223889B-12D4-46D0-8939-101C77E74B4A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{6223889B-12D4-46D0-8939-101C77E74B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{6223889B-12D4-46D0-8939-101C77E74B4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{D0E6FEDB-2CA4-49C4-BD98-113F0D5E4112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{D0E6FEDB-2CA4-49C4-BD98-113F0D5E4112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{EEDE7292-3F52-404B-9F44-36B3E556F9BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{EEDE7292-3F52-404B-9F44-36B3E556F9BC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6223889B-12D4-46D0-8939-101C77E74B4A} = {6223889B-12D4-46D0-8939-101C77E74B4A}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopWeb", "eShopWeb\eShopWeb.csproj", "{3255EB7B-F4F4-42E3-AF14-F952B4D68627}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EEDE7292-3F52-404B-9F44-36B3E556F9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEDE7292-3F52-404B-9F44-36B3E556F9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEDE7292-3F52-404B-9F44-36B3E556F9BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3255EB7B-F4F4-42E3-AF14-F952B4D68627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3255EB7B-F4F4-42E3-AF14-F952B4D68627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3255EB7B-F4F4-42E3-AF14-F952B4D68627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3255EB7B-F4F4-42E3-AF14-F952B4D68627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

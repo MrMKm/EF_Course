@@ -1,12 +1,15 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
 
 namespace Entities
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<ApplicationUser>
     {
+        public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options) { }
+
         public DbSet<AdminOrderProducts> AdminOrderProduct { get; set; }
         public DbSet<CustomerOrder> CustomerOrder { get; set; }
         public DbSet<CustomerOrderProduct> CustomerOrderProduct { get; set; }
@@ -21,11 +24,11 @@ namespace Entities
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eShopV2;Integrated Security=True";
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //{
+        //    var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eShopV2;Integrated Security=True";
 
-            options.UseSqlServer(connection);
-        }
+        //    options.UseSqlServer(connection);
+        //}
     }
 }
